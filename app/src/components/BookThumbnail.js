@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import bookCover from "../assets/book-cover.png";
+import {Link} from "react-router-dom";
 
 const BookWrapper = styled.div`
   margin-right: 20px;
@@ -23,16 +24,18 @@ const BookWrapper = styled.div`
   }
 `;
 
-const Book = ({name, categoryName}) => (
-    <BookWrapper>
+const Book = ({name, categoryName}) =>
+    <Link to="#">
+        <BookWrapper>
             <img src={bookCover} alt="Book cover" className="thumb"/>
-        <p className="book-name">
-            {name}
-        </p>
-        <p className="book-category">
-            {categoryName}
-        </p>
-    </BookWrapper>
-);
+            <p className="book-name">
+                {name}
+            </p>
+            <p className="book-category">
+                {categoryName}
+            </p>
+        </BookWrapper>
+    </Link>
+;
 
 export default Book;

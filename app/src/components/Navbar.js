@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {FaFilter, FaSearch, FaCaretDown} from "react-icons/fa";
 import {Link} from "react-router-dom";
+import GreetingMenu from "./GreetingMenu";
 
 const NavbarWrapper = styled.nav`
   display: flex;
@@ -20,6 +21,7 @@ const SearchBarWrapper = styled.div`
   align-items: center;
   background-color: #FFFFFF;
   width: 25%;
+  min-width: 400px;
   height: 30px;
   border-radius: 2px;
   
@@ -35,6 +37,7 @@ const SearchBarWrapper = styled.div`
     cursor: pointer;
     background-color: transparent;
   }
+  
   span {
     margin-left: 5px;
   }
@@ -79,26 +82,6 @@ const NavigationLinks = styled.div`
     text-decoration: none;
     font-size: 20px;
     color: #FFFFFF;
-  }
-`;
-
-const GreetingMenu = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  cursor: pointer;
-  user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  
-  span {
-    margin-right: 5px;
-  }
-  
-  svg {
-    font-size: 20px;
   }
 `;
 
