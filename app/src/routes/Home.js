@@ -6,7 +6,7 @@ const Home = () => (
     <>
         <h1>We indicate for you</h1>
         <BooksContainer>
-            <Book name="Book name" categoryName="Category"/>
+            <Book id="1" name="Book name" categoryName="Category"/>
             <Book name="Book name" categoryName="Category"/>
             <Book name="Book name" categoryName="Category"/>
             <Book name="Book name" categoryName="Category"/>
@@ -17,7 +17,7 @@ const Home = () => (
             <Book name="Book name" categoryName="Category"/>
             <Book name="Book name" categoryName="Category"/>
         </BooksContainer>
-        <hr />
+        <hr/>
         <h1>Popular</h1>
         <BooksContainer>
             <Book name="Book name" categoryName="Category"/>

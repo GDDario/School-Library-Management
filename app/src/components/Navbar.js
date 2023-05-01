@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {FaFilter, FaSearch, FaCaretDown} from "react-icons/fa";
 import {Link} from "react-router-dom";
 import GreetingMenu from "./GreetingMenu";
+
+// Will be received from the API
+let categories = ["Title", "Author", "Subject"];
 
 const NavbarWrapper = styled.nav`
   display: flex;
@@ -16,6 +19,7 @@ const NavbarWrapper = styled.nav`
 `;
 
 const SearchBarWrapper = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,11 +28,12 @@ const SearchBarWrapper = styled.div`
   min-width: 400px;
   height: 30px;
   border-radius: 2px;
-  
+
   button {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     border: none;
     border-right: 1px solid #271815;
     height: 100%;
@@ -37,9 +42,46 @@ const SearchBarWrapper = styled.div`
     cursor: pointer;
     background-color: transparent;
   }
-  
+
+  .button-filter {
+    width: 110px;
+  }
+
   span {
     margin-left: 5px;
+  }
+
+  nav {
+    position: absolute;
+    bottom: -110px;
+    left: 0;
+    width: 110px;
+    border: 1px solid #271815;
+    border-radius: 2px;
+    background: #FFFFFF;
+  }
+  
+  .hide {
+    display: none;
+  }
+
+  ul {
+    list-style: none;
+    color: #000000;
+  }
+
+  li {
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  li:hover {
+    background: #3E2723;
+    color: #FFFFFF;
+  }
+
+  li:not(:first-of-type) {
+    padding-top: 10px;
   }
 `;
 
@@ -49,7 +91,7 @@ const SearchFieldWrapper = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  
+
   input {
     height: 100%;
     border: none;
@@ -59,22 +101,45 @@ const SearchFieldWrapper = styled.div`
   }
 `;
 
-const SearchField = () => (
-    <SearchFieldWrapper>
-        <input type="text"/>
-        <button><FaSearch /></button>
-    </SearchFieldWrapper>
-);
+const SearchBar = () => {
+    const [visible, setVisible] = useState(false);
+    const [category, setCategory] = useState(categories[0]);
+    const handleClick = () => {
+        setVisible(!visible);
+    }
+    const handleCategory = (category) => {
+        setVisible(!visible);
+        setCategory(category);
+    };
 
-const SearchBar = () => (
-    <SearchBarWrapper>
-        <button>
-            <FaFilter/>
-            <span>Title</span>
-        </button>
-        <SearchField />
-    </SearchBarWrapper>
-);
+    const SearchField = () => {
+        const [text, setText] = React.useState("");
+
+        return (
+            <SearchFieldWrapper>
+                <input type="text" value={text} onChange={event => setText(event.target.value)}/>
+                <Link to={`/search/${category.toLowerCase()}/${text}`}>
+                    <button><FaSearch/></button>
+                </Link>
+            </SearchFieldWrapper>
+        )
+    };
+
+    return (
+        <SearchBarWrapper>
+            <button className="button-filter" onClick={handleClick}>
+                <FaFilter/>
+                <span>{category}</span>
+            </button>
+            <nav className={!visible ? 'hide' : ''}>
+                <ul>
+                    {categories.map(category => (<li onClick={() => handleCategory(category)}>{category}</li>))}
+                </ul>
+            </nav>
+            <SearchField/>
+        </SearchBarWrapper>
+    )
+};
 
 const NavigationLinks = styled.div`
   a {
@@ -88,7 +153,7 @@ const NavigationLinks = styled.div`
 const Navbar = () => (
     <NavbarWrapper>
         <span>Logo</span>
-        <SearchBar />
+        <SearchBar/>
         <NavigationLinks>
             <Link to="/">Home</Link>
             <Link to="/">Library</Link>
@@ -96,7 +161,7 @@ const Navbar = () => (
         </NavigationLinks>
         <GreetingMenu>
             <span>Good morning, User!</span>
-            <FaCaretDown />
+            <FaCaretDown/>
         </GreetingMenu>
     </NavbarWrapper>
 );

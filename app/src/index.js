@@ -9,6 +9,7 @@ import Home from "./routes/Home";
 import Login from "./routes/Login";
 import ErrorPage from "./routes/ErrorPage";
 import NewAccount from "./routes/NewAccount";
+import Search from "./routes/Search";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,14 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home/>
+            },
+            {
+                path: "/search/:category/",
+                element: <Home/>
+            },
+            {
+                path: "/search/:category/:text",
+                element: <Search/>
             },
         ]
     },

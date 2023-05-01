@@ -24,18 +24,20 @@ const BookWrapper = styled.div`
   }
 `;
 
-const Book = ({name, categoryName}) =>
-    <Link to="#">
-        <BookWrapper>
-            <img src={bookCover} alt="Book cover" className="thumb"/>
-            <p className="book-name">
-                {name}
-            </p>
-            <p className="book-category">
-                {categoryName}
-            </p>
-        </BookWrapper>
-    </Link>
+const Book = ({id, name, categoryName}) => {
+        const link = "/books/" + id;
+        return (<Link to={link}>
+            <BookWrapper>
+                <img src={bookCover} alt="Book cover" className="thumb"/>
+                <p className="book-name">
+                    {name}
+                </p>
+                <p className="book-category">
+                    {categoryName}
+                </p>
+            </BookWrapper>
+        </Link>)
+    }
 ;
 
 export default Book;
