@@ -16,31 +16,6 @@ a {
   height: 100vh;
 }
 
-.left-side {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 800px;
-  flex-basis: 50%;
-  padding: 40px;
-}
-
-.right-side {
-  display: table;
-  background: rgba(0, 0, 0, 0.81) url("./assets/books-background.jpeg") center;
-  background-blend-mode: overlay;
-  padding: 30px;
-  position: relative;
-  flex-basis: 50%;
-}
-
-.right-side .right-side-text {
-  color: #fff;
-  position: relative;
-  display: table-cell;
-  vertical-align: bottom;
-  text-align: right;
-}
 
 h1 {
   font-weight: unset;
@@ -49,7 +24,7 @@ h1 {
 }
 
 h2 {
-  font-size: 16px;
+  /*font-size: 16px;*/
 }
 
 form {

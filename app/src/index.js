@@ -10,6 +10,7 @@ import Login from "./routes/Login";
 import ErrorPage from "./routes/ErrorPage";
 import NewAccount from "./routes/NewAccount";
 import Search from "./routes/Search";
+import BookPage from "./routes/BookPage";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
                 path: "/search/:category/:text",
                 element: <Search/>
             },
+            {
+                path: "/books/:id",
+                element: <BookPage />
+            }
         ]
     },
     {
