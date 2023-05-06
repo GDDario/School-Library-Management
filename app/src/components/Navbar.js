@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {FaFilter, FaSearch, FaCaretDown} from "react-icons/fa";
+import {CgProfile, CgDatabase, CgLogOut} from "react-icons/cg";
 import {Link} from "react-router-dom";
 import GreetingMenu from "./GreetingMenu";
 
@@ -11,11 +12,17 @@ const NavbarWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   padding: 5px 10px;
   width: 100%;
   height: 50px;
   background-color: #271815;
   color: #FFFFFF;
+
+  .logo {
+    color: #FFFFFF;
+    text-decoration: none;
+  }
 `;
 
 const SearchBarWrapper = styled.div`
@@ -28,6 +35,7 @@ const SearchBarWrapper = styled.div`
   min-width: 400px;
   height: 30px;
   border-radius: 2px;
+  z-index: 999;
 
   button {
     display: flex;
@@ -60,7 +68,7 @@ const SearchBarWrapper = styled.div`
     border-radius: 2px;
     background: #FFFFFF;
   }
-  
+
   .hide {
     display: none;
   }
@@ -104,10 +112,10 @@ const SearchFieldWrapper = styled.div`
 const SearchBar = () => {
     const [visible, setVisible] = useState(false);
     const [category, setCategory] = useState(categories[0]);
-    const handleClick = () => {
+    const handleFilterClick = () => {
         setVisible(!visible);
     }
-    const handleCategory = (category) => {
+    const chooseCategory = (category) => {
         setVisible(!visible);
         setCategory(category);
     };
@@ -127,13 +135,13 @@ const SearchBar = () => {
 
     return (
         <SearchBarWrapper>
-            <button className="button-filter" onClick={handleClick}>
+            <button className="button-filter" onClick={handleFilterClick}>
                 <FaFilter/>
                 <span>{category}</span>
             </button>
             <nav className={!visible ? 'hide' : ''}>
                 <ul>
-                    {categories.map(category => (<li onClick={() => handleCategory(category)}>{category}</li>))}
+                    {categories.map(category => (<li onClick={() => chooseCategory(category)}>{category}</li>))}
                 </ul>
             </nav>
             <SearchField/>
@@ -150,20 +158,32 @@ const NavigationLinks = styled.div`
   }
 `;
 
-const Navbar = () => (
-    <NavbarWrapper>
-        <span>Logo</span>
-        <SearchBar/>
-        <NavigationLinks>
-            <Link to="/">Home</Link>
-            <Link to="/">Library</Link>
-            <Link to="/">Contact</Link>
-        </NavigationLinks>
-        <GreetingMenu>
-            <span>Good morning, User!</span>
-            <FaCaretDown/>
-        </GreetingMenu>
-    </NavbarWrapper>
-);
+const Navbar = () => {
+    const [visible, setVisible] = useState(false);
+    const handleGreetingClick = () => {
+        setVisible(!visible);
+    }
+
+    return (
+        <NavbarWrapper>
+            <Link className="logo" to="/">Logo</Link>
+            <SearchBar/>
+            <NavigationLinks>
+                <Link to="/">Home</Link>
+                <Link to="/contact">Contact</Link>
+            </NavigationLinks>
+            <GreetingMenu onClick={handleGreetingClick}>
+                <span>Good morning, User!</span>
+                <FaCaretDown/>
+                <nav className={!visible ? 'hide' : ''}>
+                    <ul>
+                        <Link to="/profile"><li><CgProfile/>Profile</li></Link>
+                        <Link to="/logout"><li><CgLogOut />Logout</li></Link>
+                    </ul>
+                </nav>
+            </GreetingMenu>
+        </NavbarWrapper>
+    )
+};
 
 export default Navbar;

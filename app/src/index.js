@@ -11,6 +11,8 @@ import ErrorPage from "./routes/ErrorPage";
 import NewAccount from "./routes/NewAccount";
 import Search from "./routes/Search";
 import BookPage from "./routes/BookPage";
+import Profile from "./routes/Profile";
+import Contact from "./routes/Contact";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
             {
                 path: "/books/:id",
                 element: <BookPage />
+            },
+            {
+                path: "/profile",
+                element: <Profile />
+            },
+            {
+                path: "/contact",
+                element: <Contact />
             }
         ]
     },
